@@ -1,6 +1,7 @@
 import Html exposing (..)
-import Html.Events exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Html.Keyed
 import Array exposing (Array)
 import Random
 
@@ -117,15 +118,15 @@ init =
 -- UPDATE
 
 type Msg
-    = Random
-    | Change Int
+    = Roll
+    | Show Int
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        Random ->
-            (model, Random.generate Change randomGreeting)
-        Change index ->
+        Roll ->
+            (model, Random.generate Show randomGreeting)
+        Show index ->
             let
                 greeting = Array.get index greetings
                     |> Maybe.withDefault defaultGreeting
@@ -144,10 +145,12 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "container", onClick Random ]
-    [ node "link" [ rel "stylesheet", href "style.css" ] []
-    , div [ class "hero" ]
-        [ h1 [] [ text model.phrase ]
-        , p [] [ text model.language ]
+    Html.Keyed.node "div"
+        [ class "container", onClick Roll ]
+        [ (model.language
+          , div [ class "hero" ]
+                [ h1 [] [ text model.phrase ]
+                , p [] [ text model.language ]
+                ]
+          )
         ]
-    ]
