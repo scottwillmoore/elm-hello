@@ -6,4 +6,3 @@ A fresh take on the otherwise stale hello world application.
 
 * change language after time period
 * change background gradient randomly
-* fix mozilla user-select: none

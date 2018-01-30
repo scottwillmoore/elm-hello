@@ -13,6 +13,9 @@ body {
     color: #fff;
     background-image: linear-gradient(120deg, #d299c2 0%, #fef9d7 100%);
     user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
 
 @keyframes fadeInLeft {
