@@ -183,7 +183,7 @@ update msg model =
 
 
 tickRate =
-    100 * millisecond
+    20 * millisecond
 
 
 subscriptions : Model -> Sub Msg
