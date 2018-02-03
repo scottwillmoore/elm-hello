@@ -5,7 +5,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Keyed
 import Array exposing (Array)
-import Time exposing (Time, second)
+import Time exposing (Time, second, millisecond)
+import Task
 import Random
 
 
@@ -52,9 +53,9 @@ greetings =
         , Greeting "Italian" "Ciao mondo!"
         , Greeting "Japanese" "こんにちは世界！"
         , Greeting "Kazakh" "Сәлем Әлем!"
-        , Greeting "Khmer" "សួស្តី​ពិភពលោក!"
+        , Greeting "Khmer" "សួស្តី\x200Bពិភពលោក!"
         , Greeting "Kyrgyz" "Салам дүйнө!"
-        , Greeting "Lao" "ສະ​ບາຍ​ດີ​ຊາວ​ໂລກ!"
+        , Greeting "Lao" "ສະ\x200Bບາຍ\x200Bດີ\x200Bຊາວ\x200Bໂລກ!"
         , Greeting "Latvian" "Sveika pasaule!"
         , Greeting "Lithuanian" "Labas pasauli!"
         , Greeting "Luxemburgish" "Moien Welt!"
@@ -122,12 +123,15 @@ main =
 
 
 type alias Model =
-    Greeting
+    { greeting : Greeting
+    , lastTime : Time
+    , lastReset : Time
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( defaultGreeting, Cmd.none )
+    ( (Model defaultGreeting 0 0), Task.perform Reset Time.now )
 
 
 
@@ -138,13 +142,27 @@ type Msg
     = Roll
     | Show Int
     | Tick Time
+    | Reset Time
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Reset newTime ->
+            ( { model
+                | lastTime = newTime
+                , lastReset = newTime
+              }
+            , Cmd.none
+            )
+
         Tick newTime ->
-            ( model, Random.generate Show randomGreeting )
+            if newTime - model.lastTime > 5 * second then
+                ( { model | lastTime = newTime }
+                , Random.generate Show randomGreeting
+                )
+            else
+                ( model, Cmd.none )
 
         Roll ->
             ( model, Random.generate Show randomGreeting )
@@ -155,16 +173,22 @@ update msg model =
                     Array.get index greetings
                         |> Maybe.withDefault defaultGreeting
             in
-                ( greeting, Cmd.none )
+                ( { model | greeting = greeting }
+                , Task.perform Reset Time.now
+                )
 
 
 
 -- SUBSCRIPTIONS
 
 
+tickRate =
+    100 * millisecond
+
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Time.every (5 * second) Tick
+    Time.every tickRate Tick
 
 
 
@@ -175,10 +199,13 @@ view : Model -> Html Msg
 view model =
     Html.Keyed.node "div"
         [ class "container", onClick Roll ]
-        [ ( model.language
+        [ ( model.greeting.language
           , div [ class "hero" ]
-                [ h1 [] [ text model.phrase ]
-                , p [] [ text model.language ]
+                [ h1 [] [ text model.greeting.phrase ]
+                , p [] [ text model.greeting.language ]
                 ]
+          )
+        , ( toString model.lastReset
+          , div [ class "progress" ] []
           )
         ]

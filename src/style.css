@@ -7,8 +7,8 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
     background-image: linear-gradient(120deg, #d299c2 0%, #fef9d7 100%);
@@ -28,6 +28,13 @@ body {
     to { opacity: 1; }
 }
 
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
 .hero h1 {
     margin: 0;
     font-size: 8rem;
@@ -43,4 +50,18 @@ body {
     text-align: right;
     opacity: 0;
     animation: 0.6s 0.2s forwards ease-out 1 fadeInRight;
+}
+
+@keyframes expand {
+    0%  { width: 0; }
+    8% { width: 33%; }
+}
+
+.progress {
+    width: 0px;
+    height: 4px;
+    margin-bottom: 100px;
+    background: #fff;
+    opacity: 0.5;
+    animation: expand 5s ease-in-out infinite;
 }
