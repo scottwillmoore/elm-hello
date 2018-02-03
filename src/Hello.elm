@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Keyed
 import Array exposing (Array)
+import Time exposing (Time, second)
 import Random
 
 
@@ -136,11 +137,15 @@ init =
 type Msg
     = Roll
     | Show Int
+    | Tick Time
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Tick newTime ->
+            ( model, Random.generate Show randomGreeting )
+
         Roll ->
             ( model, Random.generate Show randomGreeting )
 
@@ -159,7 +164,7 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Time.every (5 * second) Tick
 
 
 
