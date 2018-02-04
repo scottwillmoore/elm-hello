@@ -16,6 +16,7 @@ A fresh take on the otherwise stale "Hello World!" application.
 
 ❌ Change the background to a random gradient every transition.
 
+❌ Build and upload to Github pages.
 
 ## Thoughts
 
