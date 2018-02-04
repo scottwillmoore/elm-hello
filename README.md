@@ -14,9 +14,9 @@ A fresh take on the otherwise stale "Hello World!" application.
 
 ✔️ Show a visual indicator of the automatic transition.
 
-❌ Change the background to a random gradient every transition.
+✔️  Build and upload to Github pages.
 
-❌ Build and upload to Github pages.
+❌ Change the background to a random gradient every transition.
 
 ## Thoughts
 
@@ -31,3 +31,5 @@ Elm is still in early development, and many of these issues are most likely due 
 ## Setup
 
 Just in case your new to Elm and would like to play around with this project. It should be as simple as [installing elm](https://guide.elm-lang.org/install.html), running `elm-reactor` in the root directory of this project and then navigating to `localhost:8000/src/index.html`.
+
+Building and uploading to Github pages is still a work in progress. The Github pages source has currently been set to the `docs` folder (sucks that you cannot choose the name of the folder), but will most likely moved into a separate `gh-pages` branch at some point. I use `elm-make` to generate `docs/build.js`, and then all other assets are currently manually synced between the `src` and `docs` directory. I *might* write a script at some point in the future to streamline this process.
