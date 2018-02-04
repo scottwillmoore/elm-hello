@@ -63,5 +63,5 @@ body {
     margin-bottom: 100px;
     background: #fff;
     opacity: 0.5;
-    animation: expand 5s ease-in-out infinite;
+    animation: expand 3s ease-in-out infinite;
 }

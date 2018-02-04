@@ -157,7 +157,7 @@ update msg model =
             )
 
         Tick newTime ->
-            if newTime - model.lastTime > 5 * second then
+            if newTime - model.lastTime > 3 * second then
                 ( { model | lastTime = newTime }
                 , Random.generate Show randomGreeting
                 )
