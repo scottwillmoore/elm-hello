@@ -1,6 +1,6 @@
 # "Hello World!" in Elm
 
-A fresh take on the otherwise stale "Hello World!" application.
+A fresh take on the otherwise stale "Hello World!" application. [Try it out!](https://scottwillmoore.github.io/elm-hello/)
 
 ![preview of elm-hello](https://github.com/scottwillmoore/elm-hello/raw/master/preview.gif)
 
