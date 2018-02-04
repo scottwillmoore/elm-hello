@@ -4,16 +4,6 @@ A fresh take on the otherwise stale "Hello World!" application.
 
 ![preview of elm-hello](https://github.com/scottwillmoore/elm-hello/raw/master/preview.gif)
 
-## Thoughts
-
-I created this project to learn the basics of Elm, and also to test one of Elm's claimed strengths. Since Elm eliminates runtime errors, it makes implementing new features and maintaining a project much easier. My thoughts on these strengths are still undecided - most likely due to this being my first experience in a purely functional programming langauge.
-
-I am inexperience with Elm, but I found that generating random numbers could be quite tedious. Something that would usually be as simple as `Math.random()`, now requires a separate `Msg` in the update function, which requires two visits through the update function. I now require a `Roll` and a `Show` message in order to generate a random number to choose a random language.
-
-Animations also proved to be quite difficult within Elm. In order to create a simple in-out effect it would require more `Msg`'s and additional state. I was reluctant to add more `Msg`'s and state (and possibly timers), because it seemed wrong and would significantly increase the complexity of the update function. I ended up using Keyed nodes, which is a bit of a hack, and only achieves the in effect. Despite this it does work - without the complexity cost of the alternative approach.
-
-Elm is still in early development, and many of these issues are most likely due to my lack of understanding. If anyone would like to clear up, or ammend any of the points I have raised feel free to raise an issue or create a pull request.
-
 ## Features
 
 ✔️ Show "Hello World!" in a random langauge every click.
@@ -25,3 +15,18 @@ Elm is still in early development, and many of these issues are most likely due 
 ✔️ Show a visual indicator of the automatic transition.
 
 ❌ Change the background to a random gradient every transition.
+
+
+## Thoughts
+
+I created this project to learn the basics of Elm, and also to test one of Elm's claimed strengths. Since Elm eliminates runtime errors, it makes implementing new features and maintaining a project much easier. My thoughts on these strengths are still undecided - most likely due to this being my first experience in a purely functional programming langauge.
+
+I am inexperience with Elm, but I found that generating random numbers could be quite tedious. Something that would usually be as simple as `Math.random()`, now requires a separate `Msg` in the update function, which requires two visits through the update function. I now require a `Roll` and a `Show` message in order to generate a random number to choose a random language.
+
+Animations also proved to be quite difficult within Elm. In order to create a simple in-out effect it would require more `Msg`'s and additional state. I was reluctant to add more `Msg`'s and state (and possibly timers), because it seemed wrong and would significantly increase the complexity of the update function. I ended up using Keyed nodes, which is a bit of a hack, and only achieves the in effect. Despite this it does work - without the complexity cost of the alternative approach.
+
+Elm is still in early development, and many of these issues are most likely due to my lack of understanding. If anyone would like to clear up, or ammend any of the points I have raised feel free to raise an issue or create a pull request.
+
+## Setup
+
+Just in case your new to Elm and would like to play around with this project. It should be as simple as [installing elm](https://guide.elm-lang.org/install.html), running `elm-reactor` in the root directory of this project and then navigating to `localhost:8000/src/index.html`.
